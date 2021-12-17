@@ -35,15 +35,29 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
-  },
+  axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
+  build: {},
+
+  auth: {
+    strategies: {
+      azure_b2c: {
+        scheme: 'openIDConnect',
+        clientId: process.env.AZURE_CLIENT_ID,
+        endpoints: {
+          configuration: process.env.AZURE_CONFIG_URL
+        },
+        scope: ['openid']
+      }
+    }
+  },
+
+  router: {
+    middleware: ['auth']
   },
 }
