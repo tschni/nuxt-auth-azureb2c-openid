@@ -52,7 +52,7 @@ export default {
         endpoints: {
           configuration: process.env.AZURE_CONFIG_URL
         },
-        scope: ['openid']
+        scope: 'openid'
       }
     }
   },
